@@ -1,0 +1,15 @@
+<h1>Blocipedia Wiki Article List</h1>
+
+<div class="row">
+    <% @wikis.each do |wiki| %>
+    <div class="media">
+        <div class="media-body">
+            <h4 class="media-heading">
+                <%= link_to wiki.title,  wiki %>
+            </h4>
+        </div>
+    </div>
+<% end %>
+
+    
+</div>
