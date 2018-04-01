@@ -1,21 +1,7 @@
 Rails.application.routes.draw do
-  root "users#show"
+    root "users#show"
   
-  get 'wikis/new'
-
-  get 'wikis/create'
-
-  get 'wikis/update'
-
-  get 'wikis/edit'
-
-  get 'wikis/destroy'
-
-  get 'wikis/index'
-
-  get 'wikis/show'
-
-    root 'welcome#index'
+  #root 'welcome#index'
     get 'about' => 'welcome#about'
     # get 'welcome/index'
 
