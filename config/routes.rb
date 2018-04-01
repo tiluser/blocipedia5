@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "users#show"
+  
   get 'wikis/new'
 
   get 'wikis/create'
