@@ -7,10 +7,11 @@ class WikisController < ApplicationController
     end
 
     def create
+        params.require(:wiki).require(:title)
+        params.require(:wiki).require(:body)
         @wiki = Wiki.new
         @wiki.title = params[:wiki][:title]
         @wiki.body = params[:wiki][:body]
-        @wiki.private = false
         @wiki.user_id = current_user.id
         
         if @wiki.save
@@ -24,6 +25,9 @@ class WikisController < ApplicationController
     
     def update
         @wiki = Wiki.find(params[:id])
+        params.require(:id)
+        params.require(:wiki).require(:title)
+        params.require(:wiki).require(:body)
         @wiki.title = params[:wiki][:title]
         @wiki.body = params[:wiki][:body]
         if @wiki.save
