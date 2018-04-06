@@ -7,11 +7,11 @@ class WikisController < ApplicationController
     end
 
     def create
+
         params.require(:wiki).require(:title)
         params.require(:wiki).require(:body)
         @wiki = Wiki.new
-        @wiki.title = params[:wiki][:title]
-        @wiki.body = params[:wiki][:body]
+        @wiki.update_attributes(wiki_params)
         @wiki.user_id = current_user.id
         
         if @wiki.save
@@ -25,11 +25,7 @@ class WikisController < ApplicationController
     
     def update
         @wiki = Wiki.find(params[:id])
-        params.require(:id)
-        params.require(:wiki).require(:title)
-        params.require(:wiki).require(:body)
-        @wiki.title = params[:wiki][:title]
-        @wiki.body = params[:wiki][:body]
+        @wiki.update_attributes(wiki_params)
         if @wiki.save
             flash[:notice] = "Wiki article was updated"
             redirect_to [@wiki]
@@ -62,4 +58,8 @@ class WikisController < ApplicationController
         @wiki = Wiki.find(params[:id])
     end
     
+    private
+    def wiki_params
+        params.require(:wiki).permit(:title, :body, :private)
+    end
 end
