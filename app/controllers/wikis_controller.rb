@@ -7,9 +7,6 @@ class WikisController < ApplicationController
     end
 
     def create
-
-        params.require(:wiki).require(:title)
-        params.require(:wiki).require(:body)
         @wiki = Wiki.new
         @wiki.update_attributes(wiki_params)
         @wiki.user_id = current_user.id
@@ -25,6 +22,7 @@ class WikisController < ApplicationController
     
     def update
         @wiki = Wiki.find(params[:id])
+        authorize @wiki
         @wiki.update_attributes(wiki_params)
         if @wiki.save
             flash[:notice] = "Wiki article was updated"

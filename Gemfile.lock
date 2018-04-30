@@ -52,6 +52,8 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    enumerize (2.2.2)
+      activesupport (>= 3.2)
     erubi (1.7.0)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -85,6 +87,8 @@ GEM
     orm_adapter (0.5.0)
     pg (1.0.0)
     puma (3.11.2)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.4)
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
@@ -163,11 +167,13 @@ PLATFORMS
 
 DEPENDENCIES
   devise
+  enumerize
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
   pg
   puma (~> 3.0)
+  pundit
   rails (~> 5.1.2)
   sass-rails (~> 5.0)
   sqlite3

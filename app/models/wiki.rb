@@ -9,4 +9,9 @@ class Wiki < ApplicationRecord
         end
     end
     
+    def after_initialize 
+        return unless new_record?
+        self.status = ACTIVE
+    end
+    
 end
