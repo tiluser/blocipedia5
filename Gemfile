@@ -42,3 +42,12 @@
  gem 'devise'
  gem 'pundit'
  gem 'enumerize'
+ 
+ group :development, :test do
+    gem "database_cleaner"
+    gem "rspec-rails"
+end
+group :test do
+    gem "capybara"
+    gem "selenium-webdriver"
+end
