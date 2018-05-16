@@ -41,7 +41,10 @@
  
  gem 'devise'
  gem 'pundit'
+ gem "rails_admin"
+ gem "rails_admin_pundit", :github => "Samy-Amar/rails_admin_pundit"
  gem 'enumerize'
+ gem "faker"
  
  group :development, :test do
     gem "database_cleaner"

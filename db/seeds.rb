@@ -8,17 +8,19 @@
 
 require 'random_data'
 
-#1.times do
-#    User.create!(
-#        email:   "tiluser0@gmail.com",
-#        encrypted_password: "helloworld"
-#    )
-#end
+1.times do
+    User.create!(
+        email:   "tiluser0@gmail.com",
+        password: "helloworld",
+        role: 1
+    )
+end
 
-#10.times do
+#50.times do
 #    Wiki.create!(
-#        title:    RandomData.random_sentence,
-#        body:   RandomData.random_paragraph,
+#        title:    Faker::Lorem.sentence,
+#        body:   Faker::Lorem.sentences,
 #        private: false
 #    )
 #end
+
