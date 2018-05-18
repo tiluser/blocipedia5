@@ -12,15 +12,29 @@ require 'random_data'
     User.create!(
         email:   "tiluser0@gmail.com",
         password: "helloworld",
-        role: 1
+        role: "admin"
+    )
+    User.create!(
+        email:   "tiluser@yahoo.com",
+        password: "abc123",
+        role: "premium"
     )
 end
 
-#50.times do
-#    Wiki.create!(
-#        title:    Faker::Lorem.sentence,
-#        body:   Faker::Lorem.sentences,
-#        private: false
-#    )
-#end
+10.times do
+     User.create!(
+        email:   "#{Faker::Internet.user_name}@jmoshowcase.com",
+        password: "wordpass",
+        role: "standard"
+    )
+end
+
+50.times do
+    Wiki.create!(
+        title:    Faker::Lorem.sentence,
+        body:   Faker::Lorem.sentences,
+        private: false,
+        user_id: 1
+    )
+end
 

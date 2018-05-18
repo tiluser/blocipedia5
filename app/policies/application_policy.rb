@@ -29,9 +29,9 @@ class ApplicationPolicy
     def edit?
         update?
     end
-
+    
     def destroy?
-        true if user.role == 'admin' || wiki.user == user 
+        user.role == 'admin' || wiki.user == user 
     end
 
     def scope
