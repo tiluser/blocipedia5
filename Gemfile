@@ -45,6 +45,8 @@
  gem "rails_admin_pundit", :github => "Samy-Amar/rails_admin_pundit"
  gem 'enumerize'
  gem "faker"
+ gem "stripe"
+ gem 'figaro', '1.0' 
  
  group :development, :test do
     gem "database_cleaner"
@@ -54,3 +56,6 @@ group :test do
     gem "capybara"
     gem "selenium-webdriver"
 end
+
+
+
