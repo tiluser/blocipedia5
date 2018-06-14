@@ -3,8 +3,8 @@ class WikisController < ApplicationController
     
     def new
         @user = current_user
-        authorize @wiki
         @wiki = Wiki.new
+        authorize @wiki
     end
 
     def create
@@ -53,8 +53,7 @@ class WikisController < ApplicationController
     end
 
     def index
-        @wikis = Wiki.all
-        authorize @wikis
+        @wikis = policy_scope(Wiki)
     end
 
     def show

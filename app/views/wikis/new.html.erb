@@ -19,6 +19,7 @@
                 <%= f.label :body %>
                 <%= f.text_area :body, rows: 8, class: "form-control", placeholder: "Enter wiki article body" %>
             </div>
+            <%= render partial: 'form', locals: { f: f } %>  
         
             <div class="form-group">
                 <%= f.submit "Save", class: 'btn btn-success' %>

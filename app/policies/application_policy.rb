@@ -9,9 +9,23 @@ class ApplicationPolicy
     def index?
         true
     end
-
+    
     def show?
-        scope.where(:id => wiki.id).exists?
+        if @user.nil? && @wiki.private
+            false
+        elsif @user.role == 'standard' && @wiki.private
+            false
+        elsif  @wiki.user != user && @user.role == 'premium' && @wiki.private
+            false
+        elsif @user.role == 'admin'
+            true
+        elsif @user.role == 'standard' && @wiki.private == false
+            true
+        elsif @user.role == 'premium' && @wiki.private && @wiki.user == user
+            true
+        else
+            true
+        end
     end
 
     def create?

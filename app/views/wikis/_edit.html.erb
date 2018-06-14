@@ -1,7 +1,8 @@
-<% if current_user.admin? || current_user.premium? %>
+<% if current_user.admin? || current_user.premium? && current_user.email == wue %>
     <div class="form-group">
     <%= f.label :private, class: 'checkbox' do %>
         <%= f.check_box :private %> Private wiki
     <% end %>
     </div>
+     <%= wue %> 
 <% end %>
