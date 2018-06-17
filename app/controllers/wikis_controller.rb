@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
    #before_action :require_sign_in, except: :show
-    
+
     def new
         @user = current_user
         @wiki = Wiki.new
@@ -8,11 +8,14 @@ class WikisController < ApplicationController
     end
 
     def create
+        @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
         @wiki = Wiki.new
         authorize @wiki
         @wiki.update_attributes(wiki_params)
         @wiki.user_id = current_user.id
         
+        @wiki.title = @wiki.title
+        @wiki.body = @markdown.render(@wiki.body).html_safe
         if @wiki.save
             flash[:notice] = "Wiki article #{@wiki.id} was saved."
             redirect_to [@wiki]
@@ -23,9 +26,12 @@ class WikisController < ApplicationController
     end
     
     def update
+        @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
         @wiki = Wiki.find(params[:id])
         authorize @wiki
         @wiki.update_attributes(wiki_params)
+        @wiki.title = @wiki.title
+        @wiki.body = @markdown.render(@wiki.body)
         if @wiki.save
             flash[:notice] = "Wiki article was updated"
             redirect_to [@wiki]
@@ -57,6 +63,7 @@ class WikisController < ApplicationController
     end
 
     def show
+        @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
         @wiki = Wiki.find(params[:id])
         authorize @wiki
     end
