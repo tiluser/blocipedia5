@@ -33,17 +33,15 @@ class WikisController < ApplicationController
         @wiki.update_attributes(wiki_params)
         @wiki.title = @wiki.title
         @wiki.body = @markdown.render(@wiki.body)
-        collab_list = params[:users_path][:collab_list].to_s
-        puts collab_list
-        @collaborators = collab_list.split("\s+")
-
+        @wiki.collab_list = params[:wiki][:collab_list]
+        @collaborators = @wiki.collab_list.split(" ")
         @collaborators.each do |coll|
-            @wiki.collaborators.create!(user_id: coll, wiki_id: @wiki.id)
+            Collaborator.create!(user_id: coll, wiki_id: @wiki.id)
         end
         
         # @wiki.collaborators.create!(user_id: 5, wiki_id: 10)
         if @wiki.save
-            flash[:notice] = "Wiki entry was saved " + collab_list
+            flash[:notice] = "Wiki entry was saved " + params[:wiki][:collab_list]
             redirect_to [@wiki]
         else
             flash.now[:alert] = "There was an error saving the wiki article. Please try again."

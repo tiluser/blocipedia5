@@ -1212,7 +1212,7 @@ function myFunction() {
 }
 
 AppSpec.method("doTest", function (gsp) {
-    var collab_list = document.getElementById("collab_list");
+    var collab_list = document.getElementById("wiki_collab_list");
     var x = document.getElementsByName("user_list");
     var ul = x[0];
     var addList = document.getElementsByName("add_list");
