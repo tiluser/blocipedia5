@@ -1,0 +1,20 @@
+<h1>Blocipedia User List</h1>
+
+<div class="row">
+    <% @users.each do |user| %>
+    <div class="media">
+        <div class="media-body">
+            <h4 class="media-heading">
+                <%= link_to user.email,  user %>
+            </h4>
+        </div>
+    </div>
+<% end %>
+
+<select name="user_list">
+ <% @users.each do |user| %>
+  <option value="<%= user.id %>"><%= user.email %>
+ <%end%>
+ </select>
+    
+</div>

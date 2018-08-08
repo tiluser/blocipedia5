@@ -38,3 +38,17 @@ end
     )
 end
 
+Collaborator.create!(
+        user_id: 5,
+        wiki_id: 5
+    )
+
+Collaborator.create!(
+        user_id: 7,
+        wiki_id: 7
+    )
+
+Collaborator.create!(
+        user_id: 8,
+        wiki_id: 8
+    )

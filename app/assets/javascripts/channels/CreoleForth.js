@@ -1,5 +1,3 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
 // Creole Forth for JavaScript
 // Version 0.01
 // Copyright 2018 Joseph M. O'Connor
@@ -1204,26 +1202,14 @@ var AppSpec = function () {
     this.title = "Application-specific grouping";
 };
 
-function myFunction() {
-    var x = document.getElementById("mySelect");
-    var option = document.createElement("option");
-    option.text = "Kiwi";
-    x.add(option);
-}
-
 AppSpec.method("doTest", function (gsp) {
-    var collab_list = document.getElementById("collab_list");
-    var x = document.getElementsByName("user_list");
-    var ul = x[0];
-    var addList = document.getElementsByName("add_list");
-    var al = addList[0];
-    var option = document.createElement("option");
-    var ulText =  ul.options[ul.selectedIndex].text;
-    var ulVal = ul.options[ul.selectedIndex].value;
-    option.text = ulText;
-    option.value = ulVal;
-    al.add(option);
-    collab_list.value += " " + ulVal;
+    var sleep = function (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+    sleep(3000).then(() => {
+        cfb1.Modules.CorePrims.doHello(gsp);
+    });
+    
 });
 
 AppSpec.method("doBeep", function (gsp) {
@@ -1446,35 +1432,3 @@ cfb1.BuildHighLevel(gsp, ": VARIABLE CREATE 0 , ;", "VARIABLE <name>. Used for s
 gsp.CurrentVocab = "APPSPEC";
 cfb1.BuildHighLevel(gsp, ": DOTEST DO HELLO LOOP ;", "Simple testing definition");
 cfb1.BuildHighLevel(gsp, ": TL2 CHKOFF DO I 3 0 DO J LOOP LOOP CHKON ;", "Simple testing definition 2");
-
-      var parseInput = function (input) {
-            var parsedInput = input.split(/\s+/);
-            return parsedInput;
-        };
-
-        // puts textarea values onto the stack
-        var parseStack = function (taval) {
-            var ds0 = [];
-            var ds = [];
-            ds0 = taval.split("\n").reverse();
-            for (var i = 0; i < ds0.length; i++) {
-                if (ds0[i].trim() != "") {
-                    ds.push(ds0[i]);
-                } 
-            }
-            return ds;
-        };
-        
-        var cfjsSubmit = function () {
-         //   var ds = document.getElementById('DataStack').value;
-       //     var dsVals = parseStack(ds);
-        //    gsp.DataStack = dsVals;
-            
-            var input = "TEST";
-            gsp.InputArea = input;
-            cfb1.Modules.Interpreter.doParseInput(gsp);
-            cfb1.Modules.Interpreter.doOuter(gsp);
-        //    document.getElementById('DataStack').value = gsp.DataStack.reverse().join("\n");
-              document.getElementById('vlist').innerHTML = gsp.HelpCommentField;
-        //    document.getElementById('soundArea').innerHTML = gsp.SoundField;
-        };    

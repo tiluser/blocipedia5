@@ -48,6 +48,7 @@
  gem "stripe"
  gem 'figaro', '1.0' 
  gem 'redcarpet'
+ gem 'formtastic'
  
  group :development, :test do
     gem "database_cleaner"

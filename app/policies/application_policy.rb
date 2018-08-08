@@ -13,15 +13,15 @@ class ApplicationPolicy
     def show?
         if @user.nil? && @wiki.private
             false
-        elsif @user.role == 'standard' && @wiki.private
+        elsif @user.role == 'standard' && @wiki.private && @wiki.collaborators.where(:user_id => user.id).length == 0
             false
-        elsif  @wiki.user != user && @user.role == 'premium' && @wiki.private
+        elsif  (@wiki.user != user ||  @wiki.collaborators.where(:user_id => user.id).length == 0) && @user.role == 'premium' && @wiki.private
             false
         elsif @user.role == 'admin'
             true
-        elsif @user.role == 'standard' && @wiki.private == false
+        elsif @user.role == 'standard' && @wiki.private == false 
             true
-        elsif @user.role == 'premium' && @wiki.private && @wiki.user == user
+        elsif @user.role == 'premium' && @wiki.private && (@wiki.user == user ||  @wiki.collaborators.where(:user_id => user.id).length > 0)
             true
         else
             true

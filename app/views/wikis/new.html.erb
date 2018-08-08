@@ -8,19 +8,34 @@
             <li>Keep the profanity to a reasonable level.</li>
             <li>Nigerian scams are a banhammer offense..</li>
         </ul>
+    </div>   
+    
+    <div class="col-md-4">
+        <p>Add page collaborators: </p>
+        <select name="user_list">
+            <% @users.each do |user| %>
+                <option value="<%= user.id %>"><%= user.email %>
+            <%end%>
+        </select>
+        <br />
+    <%= link_to "Add collaborator", collaborators_path, method: :create %>
+        <br />
     </div>
+    
     <div class="col-md-8">
         <%= form_for [@wiki] do |f| %>
             <div class="form-group">
                 <%= f.label :title %>
                 <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki article title" %>
             </div>
+            <br />
             <div class="form-group">
                 <%= f.label :body %>
-                <%= f.text_area :body, rows: 12, class: "form-control", placeholder: "Enter wiki article body" %>
+                <%= f.text_area :body, rows: 12, cols: 100, class: "form-control", placeholder: "Enter wiki article body" %>
             </div>
+            <br />
             <%= render partial: 'form', locals: { f: f } %>  
-        
+            <br />      
             <div class="form-group">
                 <%= f.submit "Save", class: 'btn btn-success' %>
             </div>

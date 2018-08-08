@@ -9,17 +9,43 @@
             <li>Nigerian scams are a banhammer offense..</li>
         </ul>
     </div>
+    
+    <div class="col-md-4">
+        <p>Add page collaborators: </p>
+        <select name="user_list">
+            <% @users.each do |user| %>
+                <% if user != @wiki.user %>
+                    <option value="<%= user.id %>"><%= user.email %>
+                <% end %>
+            <%end%>
+        </select>
+        <button class="button" onclick="cfjsSubmit()">Add</button>
+        <select name="add_list">
+        </select>
+        <br />
+        
+        <%= form_with url: users_path do |form| %>
+            <%= form.text_field :collab_list %>
+        <% end %>
+
+        <br />
+        <br />
+    </div>
+    
+    <div id="vlist">
+    </div>
+
     <div class="col-md-8">
         <%= form_for [@wiki] do |f| %>
             <div class="form-group">
                 <%= f.label :title %>
-                <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki article title" %>
+                <%= f.text_field :title, size: 50, class: 'form-control', placeholder: "Enter wiki article title" %>
             </div>
             <div class="form-group">
                 <%= f.label :body %>
-                <%= f.text_area :body, rows: 8, class: "form-control", placeholder: "Enter wiki article body" %>
+                <%= f.text_area :body, rows: 12, cols: 100, class: "form-control", placeholder: "Enter wiki article body" %>
             </div>
-            <%= render partial: 'edit', locals: { f: f, wue: @wiki.user.email } %>  
+            <%= render partial: 'edit', locals: { f: f, wue: @wiki.user.email } %> 
             <div class="form-group">
                 <%= f.submit "Save", class: 'btn btn-success' %>
             </div>

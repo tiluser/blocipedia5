@@ -4,6 +4,7 @@ class WikisController < ApplicationController
     def new
         @user = current_user
         @wiki = Wiki.new
+        @users = User.all
         authorize @wiki
     end
 
@@ -32,8 +33,17 @@ class WikisController < ApplicationController
         @wiki.update_attributes(wiki_params)
         @wiki.title = @wiki.title
         @wiki.body = @markdown.render(@wiki.body)
+        collab_list = params[:users_path][:collab_list].to_s
+        puts collab_list
+        @collaborators = collab_list.split("\s+")
+
+        @collaborators.each do |coll|
+            @wiki.collaborators.create!(user_id: coll, wiki_id: @wiki.id)
+        end
+        
+        # @wiki.collaborators.create!(user_id: 5, wiki_id: 10)
         if @wiki.save
-            flash[:notice] = "Wiki article was updated"
+            flash[:notice] = "Wiki entry was saved " + collab_list
             redirect_to [@wiki]
         else
             flash.now[:alert] = "There was an error saving the wiki article. Please try again."
@@ -42,6 +52,7 @@ class WikisController < ApplicationController
     end
     
     def edit
+        @users = User.all
         @wiki = Wiki.find(params[:id])
         authorize @wiki
     end
