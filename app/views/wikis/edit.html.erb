@@ -23,7 +23,7 @@
                 <% end %>
             <%end%>
         </select>
-        <button class="button" onclick="cfjsSubmit()">Add</button>
+        <button class="button" onclick="cfjsSubmit('POPULISTS')">Add</button>
         <select name="add_list">
         </select>
         <br />
@@ -36,7 +36,7 @@
                 <%= f.text_field :title, size: 50, class: 'form-control', placeholder: "Enter wiki article title" %>
             </div>
             <div class="form-group">
-                <%= f.text_field :collab_list, size: 50, class: 'form-control' %>  
+                <%= f.hidden_field :collab_list, size: 50, class: 'form-control' %>  
             </div>
             <div class="form-group">
                 <%= f.label :body %>

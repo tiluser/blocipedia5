@@ -11,9 +11,11 @@ class ApplicationPolicy
     end
     
     def show?
-        if @user.nil? && @wiki.private
+        if @user.nil? && @wiki.public
+            true        
+        elsif @user.nil? && @wiki.private
             false
-        elsif @user.role == 'standard' && @wiki.private && @wiki.collaborators.where(:user_id => user.id).length == 0
+        elsif @user.role == 'standard' && @wiki.private &&  @wiki.collaborators.include?(@user) == false
             false
         elsif  (@wiki.user != user ||  @wiki.collaborators.where(:user_id => user.id).length == 0) && @user.role == 'premium' && @wiki.private
             false

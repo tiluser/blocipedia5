@@ -36,12 +36,13 @@ class WikisController < ApplicationController
         @wiki.collab_list = params[:wiki][:collab_list]
         @collaborators = @wiki.collab_list.split(" ")
         @collaborators.each do |coll|
-            Collaborator.create!(user_id: coll, wiki_id: @wiki.id)
+            if @wiki.collaborators.where(:user_id => coll).length == 0 
+                Collaborator.create!(user_id: coll, wiki_id: @wiki.id)
+            end
         end
         
-        # @wiki.collaborators.create!(user_id: 5, wiki_id: 10)
         if @wiki.save
-            flash[:notice] = "Wiki entry was saved " + params[:wiki][:collab_list]
+            flash[:notice] = "Wiki entry was saved "
             redirect_to [@wiki]
         else
             flash.now[:alert] = "There was an error saving the wiki article. Please try again."

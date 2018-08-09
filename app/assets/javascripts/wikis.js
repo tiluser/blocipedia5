@@ -1211,6 +1211,23 @@ function myFunction() {
     x.add(option);
 }
 
+// Populates the user and collaborator dropdowns
+AppSpec.method("doPopUserLists", function (gsp) {
+    var collab_list = document.getElementById("wiki_collab_list");
+    var ulArray = document.getElementsByName("user_list");
+    var ul = ulArray[0];
+    var addList = document.getElementsByName("add_list");
+    var al = addList[0];
+    var option = document.createElement("option");
+    var ulText =  ul.options[ul.selectedIndex].text;
+    var ulVal = ul.options[ul.selectedIndex].value;
+    option.text = ulText;
+    option.value = ulVal;
+    al.add(option);
+    collab_list.value += " " + ulVal;
+});
+
+
 AppSpec.method("doTest", function (gsp) {
     var collab_list = document.getElementById("wiki_collab_list");
     var x = document.getElementsByName("user_list");
@@ -1439,6 +1456,7 @@ cfb1.BuildPrimitive("\{", cfb1.Modules.Compiler.doCompileList, "Compiler.doCompi
 cfb1.BuildPrimitive("BEEP", cfb1.Modules.AppSpec.doBeep, "AppSpec.doBeep", "APPSPEC", "COMPINPF","( -- ) Plays short beeping sound");
 cfb1.BuildPrimitive("SLEEP", cfb1.Modules.AppSpec.doSleep, "AppSpec.doSleep", "APPSPEC", "COMPINPF","( n -- ) Sleeps n milliseconds");
 cfb1.BuildPrimitive("TEST", cfb1.Modules.AppSpec.doTest, "AppSpec.doTest", "APPSPEC", "COMPINPF","( -- ) Do what you like here");
+cfb1.BuildPrimitive("POPULISTS", cfb1.Modules.AppSpec.doPopUserLists, "AppSpec.doPopUserLists", "APPSPEC", "COMPINPF","( -- ) Populates the user and collaborator dropdowns");
 
 cfb1.BuildHighLevel(gsp, ": CONSTANT CREATE , DOES> @ ;", "( val -- ) CONSTANT <name>. Defining word for scalar constants");
 cfb1.BuildHighLevel(gsp, ": VARIABLE CREATE 0 , ;", "VARIABLE <name>. Used for simple scalar data storage and retrieval");
@@ -1465,16 +1483,16 @@ cfb1.BuildHighLevel(gsp, ": TL2 CHKOFF DO I 3 0 DO J LOOP LOOP CHKON ;", "Simple
             return ds;
         };
         
-        var cfjsSubmit = function () {
+        var cfjsSubmit = function (cmdList) {
          //   var ds = document.getElementById('DataStack').value;
        //     var dsVals = parseStack(ds);
         //    gsp.DataStack = dsVals;
             
-            var input = "TEST";
+            var input = cmdList;
             gsp.InputArea = input;
             cfb1.Modules.Interpreter.doParseInput(gsp);
             cfb1.Modules.Interpreter.doOuter(gsp);
         //    document.getElementById('DataStack').value = gsp.DataStack.reverse().join("\n");
-              document.getElementById('vlist').innerHTML = gsp.HelpCommentField;
+         //     document.getElementById('vlist').innerHTML = gsp.HelpCommentField;
         //    document.getElementById('soundArea').innerHTML = gsp.SoundField;
         };    
