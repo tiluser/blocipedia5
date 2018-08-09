@@ -13,7 +13,7 @@
     <div class="col-md-4">
 
     </div>
-    
+    <% if current_user.admin? || current_user == @wiki.user %>
     <div class="col-md-8">
         <p>Add page collaborators: </p>
         <select name="user_list">
@@ -29,6 +29,7 @@
         <br />
         <br />
         <br />
+        <% end %>
         
         <%= form_for [@wiki] do |f| %>
             <div class="form-group">
